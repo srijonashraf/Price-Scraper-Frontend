@@ -10,6 +10,7 @@ const App = () => {
   const [siteImageMap, setSiteImageMap] = useState({});
 
   const BaseURL = 'https://price-scrapper-backend.onrender.com/api/v1';
+  // const BaseURL = 'http://localhost:3000/api/v1';
 
   const handleSearch = async (keyword) => {
     try {
