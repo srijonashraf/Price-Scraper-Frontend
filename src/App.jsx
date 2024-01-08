@@ -24,11 +24,11 @@ const App = () => {
       const data = await response.json();
 
       if (data.data) {
-        const { minPriceSource, ...filteredResults } = data.data;
-
+        const { minPrice, ...filteredResults } = data.data;
         toast.success('Data fetched successfully!');
+        console.log(filteredResults, minPrice.minSitename);
         setResults(filteredResults);
-        setMinPrice(minPriceSource);
+        setMinPrice(minPrice.minSitename);
       } else {
         setResults(null);
       }
@@ -62,7 +62,7 @@ const App = () => {
     };
 
     fetchLogoData();
-  }, []); // Empty dependency array to run the effect only once
+  }, []);
 
   const LogoMarquee = () => (
     <marquee className="d-flex flex-row">
@@ -92,7 +92,7 @@ const App = () => {
             <div className="row justify-content-center">
               {Object.entries(results).map(([source, result]) => (
                 <div key={source} className="col-md-4 mb-4">
-                  <div className={`card h-100 shadow ${minPrice === result.siteName ? 'border-primary border-2' : ''}`}>
+                  <div className={`card h-100 shadow ${minPrice === result.siteName ? 'border-primary border-3' : ''}`}>
                     <div className="card-body p-4">
                       <h5 className="card-title">{result.productName}</h5>
                       <img
@@ -102,7 +102,7 @@ const App = () => {
                         className="card-img-top d-flex my-2 rounded-1 img-fluid img-thumbnail"
                       />
                       <p className="card-text btn btn-success rounded-1 btn-sm">
-                        Price: {result.price || result.priceNew}
+                        Price: {result.price}
                       </p>
                       {minPrice === result.siteName && (
                         <p className="badge rounded-1 bg-danger float-end fs-6">Lowest Price!!</p>
