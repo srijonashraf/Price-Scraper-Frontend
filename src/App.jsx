@@ -26,7 +26,6 @@ const App = () => {
       if (data.data) {
         const { minPrice, ...filteredResults } = data.data;
         toast.success('Data fetched successfully!');
-        console.log(filteredResults, minPrice.minSitename);
         setResults(filteredResults);
         setMinPrice(minPrice.minSitename);
       } else {
@@ -102,10 +101,10 @@ const App = () => {
                         className="card-img-top d-flex my-2 rounded-1 img-fluid img-thumbnail"
                       />
                       <p className="card-text btn btn-success rounded-1 btn-sm">
-                        Price: {result.price}
+                        Price: {result.price || result.priceOld}
                       </p>
                       {minPrice === result.siteName && (
-                        <p className="badge rounded-1 bg-danger float-end fs-6">Lowest Price!!</p>
+                        <p className="badge rounded-1 bg-danger animated flash float-end fs-6">Lowest Price!!</p>
                       )}
                       <p>
                         Availability:{' '}
