@@ -99,6 +99,7 @@ const App = () => {
               {Object.entries(results).map(([source, result]) => (
                 <div key={source} className="col-md-4 mb-4">
                   <div className={`card h-100 shadow ${minPrice === result.siteName ? 'border-primary border-3' : ''}`}>
+                  <img src={result.imgSrc} className='img-fluid img-thumbnail object-fit-cover' alt="" />
                     <div className="card-body p-4">
                       <h5 className="card-title">{result.productName}</h5>
                       <img
@@ -107,6 +108,8 @@ const App = () => {
                         alt={result.siteName}
                         className="card-img-top d-flex my-2 rounded-1 img-fluid img-thumbnail"
                       />
+
+                     
                       <p className="card-text btn btn-success rounded-1 btn-sm">
                         Price: {result.price || result.priceOld}
                       </p>
