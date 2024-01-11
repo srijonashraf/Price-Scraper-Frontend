@@ -23,18 +23,18 @@ const App = () => {
     try {
       setLoading(true);
       const response = await fetch(`${BaseURL}/scrape/${encodeURIComponent(keyword)}`);
-
+      const lowestPriceResponse = await fetch(`${BaseURL}/lowestprice`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
 
       const data = await response.json();
-      console.log(data.data)
+      const lowestPriceData = await lowestPriceResponse.json();
+
       if (data.data) {
-        const { minimumPrice, ...filteredResults } = data.data;
         toast.success('Data fetched successfully!');
-        setResults(filteredResults);
-        setMinPrice(minimumPrice.minSitename);
+        setResults(data.data);
+        setMinPrice(lowestPriceData.data['minSitename']);
       } else {
         setResults(null);
       }
