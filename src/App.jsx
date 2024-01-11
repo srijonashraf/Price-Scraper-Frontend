@@ -9,8 +9,15 @@ const App = () => {
   const [minPrice, setMinPrice] = useState(null);
   const [siteImageMap, setSiteImageMap] = useState({});
 
-  const BaseURL = 'https://price-scrapper-backend.onrender.com/api/v1';
-  // const BaseURL = 'http://localhost:3000/api/v1';
+  let BaseURL;
+
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+
+    BaseURL = 'http://localhost:3000/api/v1';
+  } else {
+
+    BaseURL = 'https://price-scrapper-backend.onrender.com/api/v1';
+  }
 
   const handleSearch = async (keyword) => {
     try {
@@ -43,14 +50,14 @@ const App = () => {
   useEffect(() => {
     const fetchLogoData = async () => {
       try {
-        const response = await fetch('/logo.json');
+        const response = await fetch(`${BaseURL}/logo`);
         if (!response.ok) {
           throw new Error('Failed to fetch logo data');
         }
 
         const logoData = await response.json();
         const newSiteImageMap = {};
-        logoData.forEach(({ name, img }) => {
+        logoData['data'].forEach(({ name, img }) => {
           newSiteImageMap[name] = img;
         });
 
