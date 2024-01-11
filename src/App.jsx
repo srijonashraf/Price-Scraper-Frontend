@@ -22,12 +22,12 @@ const App = () => {
       }
 
       const data = await response.json();
-
+      console.log(data.data)
       if (data.data) {
-        const { minPrice, ...filteredResults } = data.data;
+        const { minimumPrice, ...filteredResults } = data.data;
         toast.success('Data fetched successfully!');
         setResults(filteredResults);
-        setMinPrice(minPrice.minSitename);
+        setMinPrice(minimumPrice.minSitename);
       } else {
         setResults(null);
       }
