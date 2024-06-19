@@ -1,5 +1,3 @@
-// src/Search.js
-
 import React, { useState } from 'react';
 
 const Search = ({ onSearch }) => {
